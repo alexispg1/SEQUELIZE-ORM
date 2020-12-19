@@ -32,7 +32,7 @@ app.listen(PORT, function () {
 
     // Conectase a la base de datos
     // Force true: DROP TABLES
-    sequelize.sync({ force:false }).then(() => {
+    sequelize.sync({ force:false}).then(() => {
         console.log("Nos hemos conectado a la base de datos prro");
     }).catch(error => {
         console.log('Se ha producido un error', error);

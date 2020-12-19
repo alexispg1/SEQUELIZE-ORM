@@ -19,8 +19,23 @@ const transferencia = require('../models/transferencia');
 const Usuario = require('../models/Usuario');
 const UsuarioCal = require('../models/UsuarioCal');
 
-// Uno a uno
+// un usuario tiene una o muchas boletas y una boleta pertenece a un usuario
+Usuario.hasMany(Boleta,{foreignKey:"usuario_id"});
+Boleta.belongsTo(Usuario,{
+    foreignKey:{ 
+        name:'usuario_id'
+    }
+});
+//una boleta tiene  a una boleta tarea y una boleta tarea pertenece a una boleta
+Boleta.hasOne(BoletaTarea,{foreignKey:"id_boleta_tarea"});
+BoletaTarea.belongsTo(Boleta);
 
-// Usuario tiene una direccion
-// añadir una clave foranea userId a la tabla addresses
+//una tarea solicitada tiene una boleta tarea y una boleta tarea  pertenece una tarea solicitada 
+TareaSolicitada.hasOne(BoletaTarea);
+BoletaTarea.belongsTo(TareaSolicitada);
+
+
+
+
+
 
