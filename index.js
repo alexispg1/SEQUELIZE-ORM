@@ -21,6 +21,10 @@ app.get('/', function (req, res) {
 app.use('/user',require('./routes/api'));
 app.use('/categoria',require('./routes/api_categoria'));
 app.use('/subcategoria',require('./routes/api_subcategoria'));
+app.use('/tarea',require('./routes/api_tarea'));
+//falta el de boleta
+app.use('/boleta/tarea',require('./routes/api_boleta_tarea'));
+//app.use('tarea/solicitada',require('./routes/api_tarea_solicitada'));
 
 
 /* 

@@ -26,20 +26,19 @@ Boleta.belongsTo(Usuario,{
         name:'usuario_id'
     }
 });
+
 //una boleta tiene  a una boleta tarea y una boleta tarea pertenece a una boleta
-Boleta.hasOne(BoletaTarea,{foreignKey:"id_boleta_tarea"});
-BoletaTarea.belongsTo(Boleta);
-
-//una tarea solicitada tiene una boleta tarea y una boleta tarea  pertenece una tarea solicitada 
-TareaSolicitada.hasOne(BoletaTarea);
-BoletaTarea.belongsTo(TareaSolicitada);
-
-
-//22-12-2020 ,una tarea tiene una o mas subcategorias una subcategoria pertenece a una tarea
+Boleta.hasOne(BoletaTarea);
+BoletaTarea.belongsTo(Boleta,{foreignKey:"id_boleta"});
+//una boleta tarea tienes una tarea solicitda y una tarea solicitada pertenece a una boleta tarea 
+BoletaTarea.hasOne(TareaSolicitada);
+TareaSolicitada.belongsTo(BoletaTarea,{foreignKey:"id_boleta_tarea"});
+//22-12-2020 ,una categoria tiene una o mas subcategorias una subcategoria pertenece a una categoria
 Categoria.hasMany(Subcategoria,{as:"subcategorias",foreignKey:"id_categoria"});
 Subcategoria.belongsTo(Categoria,{as:"categoria",foreignKey:"id_categoria"});
-
-
+//22-12-2020 ,una subcategoria tiene una o mas tarea una tarea pertenece a una subcategoria
+Subcategoria.hasMany(Tarea,{as:"tareas",foreignKey:"id_subcategoria"});
+Tarea.belongsTo(Subcategoria,{as:"subcategoria",foreignKey:"id_subcategoria"});
 
 
 

@@ -1,6 +1,3 @@
-const { response } = require('express');
-const { model } = require('../database/db');
-const { associations } = require('../models/Categoria');
 const Categoria=require('../models/Categoria');
 const Subcategoria = require('../models/Subcategoria');
 
@@ -42,20 +39,20 @@ const show=async(req,res)=>{
 const create=async(req,res)=>{
 
     try{ 
-        Categoria.create({
+        let categoria=await Categoria.create({
             nombre_categoria:req.body.nombre_categoria,
             estado_categoria:req.body.estado_categoria,
         })
-        const categoria={
+        const categoriax={
             ok:true,
-            nombre_categoria:req.body.nombre_categoria,
-            estado_categoria:req.body.estado_categoria
+            categoria:categoria,
         }
-        return res.json({categoria}).code(200);
+        return res.json(categoriax).status(200);
     } catch (error) {
         return res.json({
-            ok:false
-        })
+            ok:false,
+            message:'categoria no encontrada'
+        });
     }
     
 }
@@ -66,7 +63,7 @@ const destroy=async(req,res)=>{
         const categori=await categoria.destroy(); 
         return res.json({
             ok:true,
-            categoria:categoria
+            categoria:categori
         }).status(200);
     } catch (error) {
         return res.json({
@@ -86,7 +83,7 @@ const update=async(req,res)=>{
         await categoria.save();
         return res.json({
             ok:true,
-            categoria
+            categoria:categoria
         }).status(200);
     } catch (error) {
         return res.json({
