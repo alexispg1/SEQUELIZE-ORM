@@ -35,6 +35,11 @@ TareaSolicitada.hasOne(BoletaTarea);
 BoletaTarea.belongsTo(TareaSolicitada);
 
 
+//22-12-2020 ,una tarea tiene una o mas subcategorias una subcategoria pertenece a una tarea
+Categoria.hasMany(Subcategoria,{as:"subcategorias",foreignKey:"id_categoria"});
+Subcategoria.belongsTo(Categoria,{as:"categoria",foreignKey:"id_categoria"});
+
+
 
 
 

@@ -4,15 +4,11 @@ const bcrypt = require('bcryptjs');
 const Usuario = require('../models/usuario');
 const { generarJWT } = require('../helpers/jwt');
 
-
 const crearUsuario = async (req,res) => {
-
     try {
-    
         let contrasenia=req.body.contrasenia;
         const salt = bcrypt.genSaltSync();
-        contrasenia= bcrypt.hashSync(contrasenia, salt );
-        
+        contrasenia= bcrypt.hashSync(contrasenia,salt);
         let user = await Usuario.create({ 
             nombre:req.body.nombre,
             apellido:req.body.apellido,
@@ -22,9 +18,7 @@ const crearUsuario = async (req,res) => {
             genero:req.body.genero,
             tipo_usuario:req.body.tipo_usuario
         });
-        
         const token = await generarJWT(user);
-        
         let usuario={
             id:user.id,
             nombre:user.nombre,
@@ -34,12 +28,10 @@ const crearUsuario = async (req,res) => {
             genero:user.genero,
             token:token,
         }
-
         return res.json({
             ok: true,
             usuario,
         });
-
 
     } catch (error) {
         console.log(error);
@@ -51,9 +43,7 @@ const crearUsuario = async (req,res) => {
 }
 
 const login = async ( req, res = response ) => {
-
     const { correo, contrasenia } = req.body;
-
     try { 
         const usuarioDB = await Usuario.findOne({ where:{ correo:correo}});
         console.log("usuario encontrado ",usuarioDB.correo);
@@ -72,8 +62,7 @@ const login = async ( req, res = response ) => {
             });
         }
         // Generar el JWT
-        const token = await generarJWT( usuarioDB.id );
-        
+        const token = await generarJWT(usuarioDB);
         let usuario={
             id:usuarioDB.id,
             nombre:usuarioDB.nombre,
@@ -81,7 +70,7 @@ const login = async ( req, res = response ) => {
             correo:usuarioDB.correo,
             celular:usuarioDB.celular,
             genero:usuarioDB.genero,
-            token:usuarioDB.token,
+            token:token,
         }
 
         res.json({
@@ -100,6 +89,42 @@ const login = async ( req, res = response ) => {
 
 }
 
+const terminarRegistro = async(req,res)=>{
+    try{
+        usuario=await Usuario.findByPk(req.uid.id);
+        usuario.update({
+        rut:req.body.rut,
+        dv:req.body.dv,
+        clave:req.body.clave,
+        ap_pat:req.body.ap_pat,
+        ap_mat:req.body.ap_mat,
+        ocupacion:req.body.ocupacion,
+        fecha_nac:req.body.fecha_nac,
+        estado:req.body.estado,
+        ultimo_log:req.body.ultimo_log,
+        tipo_registro:req.body.tipo_registro,
+        fecha_creacion:req.body.fecha_creacion,
+        activacion:req.body.activacion,
+        verificacion:req.body.verificacion,
+        pass_token:req.body.pass_token,
+        pass_restaurar:req.body.pass_restaurar,
+        giro:req.body.giro,
+        rubro:req.body.rubro,
+        });
+        await usuario.save();
+        return res.json({
+            ok: true,
+            usuario:usuario,
+        });
+
+    }catch(error){
+        return res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        }) 
+    }
+    
+}
 
 const renewToken = async( req, res = response) => {
 
@@ -123,5 +148,6 @@ const renewToken = async( req, res = response) => {
 module.exports = {
     crearUsuario,
     login,
+    terminarRegistro,
     renewToken
 }

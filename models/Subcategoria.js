@@ -48,7 +48,7 @@ Subcategoria.init({
     }, 
 },
 
-     {
+    {
     sequelize,
     modelName: "subcategoria",
     timestamps: true

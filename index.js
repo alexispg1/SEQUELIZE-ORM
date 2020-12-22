@@ -16,10 +16,12 @@ app.use(express.urlencoded({ extended: false }));
 app.get('/', function (req, res) {
     res.json("Hola Mundo");
 });
-app.use('/auth', require('./routes/auth'));
 
-//priobandon la ruta register and login
+
 app.use('/user',require('./routes/api'));
+app.use('/categoria',require('./routes/api_categoria'));
+app.use('/subcategoria',require('./routes/api_subcategoria'));
+
 
 /* 
 app.use('/api/posts', require('./routes/posts'));
