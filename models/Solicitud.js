@@ -20,7 +20,6 @@ Solicitud.init({
         defaultValue: '',
          
     },
-
     doc_cert_antecedentes: {
         type: DataTypes.STRING,
         allowNull: true,

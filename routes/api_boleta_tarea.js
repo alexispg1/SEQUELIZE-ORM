@@ -1,7 +1,6 @@
 const express=require('express');
 const router=express.Router();
 
-
 const BoletaTareaController=require('../controllers/BoletaTareaController');
 const Authorization=require('../middlewares/validar-jwt');
 

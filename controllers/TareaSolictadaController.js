@@ -1,4 +1,4 @@
-const BoletaTarea=require('../models/BoletaTarea');
+const TareaSolicitada=require('../models/TareaSolicitada');
 
 
 const index=async(req,res)=>{
