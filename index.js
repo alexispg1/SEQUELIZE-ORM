@@ -23,7 +23,7 @@ app.use('/subcategoria',require('./routes/api_subcategoria'));
 app.use('/tarea',require('./routes/api_tarea'));
 app.use('/boleta',require('./routes/api_boleta'));
 app.use('/boleta/tarea',require('./routes/api_boleta_tarea'));
-app.use('/tarea/solicitad',require('./routes/api_tarea_solicitada'));
+app.use('/tarea/solicitada',require('./routes/api_tarea_solicitada'));
 
 //app.use('tarea/solicitada',require('./routes/api_tarea_solicitada'));
 
