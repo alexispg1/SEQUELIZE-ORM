@@ -24,9 +24,14 @@ app.use('/tarea',require('./routes/api_tarea'));
 app.use('/boleta',require('./routes/api_boleta'));
 app.use('/boleta/tarea',require('./routes/api_boleta_tarea'));
 app.use('/tarea/solicitada',require('./routes/api_tarea_solicitada'));
+app.use('/categoria/usuario',require('./routes/api_categoria_usuario'));
+app.use('/credito',require('./routes/api_credito'));
+app.use('/credito',require('./routes/api_credito'));
+app.use('/geo',require('./routes/api_geo'));
+app.use('/faq',require('./routes/api_faq'));
+
 
 //app.use('tarea/solicitada',require('./routes/api_tarea_solicitada'));
-
 /* 
 app.use('/api/posts', require('./routes/posts'));
 app.use('/api/users', require('./routes/users'));

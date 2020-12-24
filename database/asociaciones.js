@@ -26,6 +26,25 @@ Boleta.belongsTo(Usuario,{
         name:'usuario_id'
     }
 });
+// un usuario tiene una o mas categoriaUsuarios una categoriaUsuarios pertenece a un Usuario
+Usuario.hasMany(CategoriaUsuario,{foreignKey:"usuario_id"});
+CategoriaUsuario.belongsTo(Usuario,{
+    foreignKey:{ 
+    name:'usuario_id'}
+});
+// un usuario tienes una o mas credito un credito pertenece aun usuario
+Usuario.hasMany(Credito,{foreignKey:"usuario_id"})
+Credito.belongsTo(Usuario,{as:"usuario",
+    foreignKey:{ 
+    name:'usuario_id'}
+});
+// un usuario tiene una o muchas geo un geo pertenece a un suario
+Usuario.hasMany(Geo,{foreignKey:"usuario_id"})
+Geo.belongsTo(Usuario,{as:"usuario",
+    foreignKey:{ 
+    name:'usuario_id'}
+});
+
 
 //una boleta tiene  a una boleta tarea y una boleta tarea pertenece a una boleta
 Boleta.hasOne(BoletaTarea,{foreignKey:"id_boleta"});
